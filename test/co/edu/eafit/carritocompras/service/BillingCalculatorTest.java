@@ -38,7 +38,7 @@ public class BillingCalculatorTest {
                 //true values
                 price = price.add(p.getPrice());
                 // just discounts
-                discounts = discounts.add(p.getPrice().multiply(new BigDecimal(0.2)));
+                discounts = discounts.add(p.getPrice().multiply(new BigDecimal(0.05)));
             }
             else if (code.startsWith("FU"))
             {

@@ -8,7 +8,7 @@ public class ElectronicProduct extends Product {
 
 	@Override
 	public BigDecimal calculateDiscount() {
-		return this.getPrice().multiply(new BigDecimal(0.2));
+		return this.getPrice().multiply(new BigDecimal(0.05));
 	}
 
 	public ElectronicProduct(String code, String name, BigDecimal price) {
