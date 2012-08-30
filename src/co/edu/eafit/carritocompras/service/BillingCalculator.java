@@ -23,9 +23,11 @@ public class BillingCalculator {
 		Purchase purchase = new Purchase(customer);
 		List<Product>products = new ArrayList<Product>();
 		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal value = BigDecimal.ZERO;
 		for (String code : productsFlatFile.split(",")) {
 			Product p = Product.buildProduct(code);
-			total = total.add(p.getPrice());
+			value = CalculateIva.iva(p.getCode());
+			total = total.add(p.getPrice()).add(p.getPrice()).multiply(value);
 			total = total.subtract(p.calculateDiscount());
 			products.add(p);
 		}

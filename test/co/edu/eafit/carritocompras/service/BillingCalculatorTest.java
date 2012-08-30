@@ -6,6 +6,9 @@ import co.edu.eafit.carritocompras.data.Product;
 import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import org.junit.*;
+import org.mockito.Mockito;
+
+import static org.mockito.*;
 //import org.junit.Test;
 //import org.junit.Before;
 
@@ -47,6 +50,15 @@ public class BillingCalculatorTest {
             }
         }
         assertEquals(result.getTotalPrice().add(discounts),price);  
+    }
+    
+    @Test
+    public void testCalculateIva()
+    {
+    	CalculateIva calculateIva = Mockito.mock(CalculateIva.class);
+    	
+    	when(calculateIva.iva(code) )
+    	
     }
 
 }

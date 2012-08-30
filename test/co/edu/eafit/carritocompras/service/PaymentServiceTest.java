@@ -2,6 +2,8 @@ package co.edu.eafit.carritocompras.service;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
 import static org.mockito.Mockito.*;
 
 import co.edu.eafit.carritocompras.data.Customer;
@@ -20,7 +22,7 @@ public class PaymentServiceTest {
 	
 	@Test
 	public void testPay() {
-		GenericCreditCardService creditCardService = mock(GenericCreditCardService.class);
+		GenericCreditCardService creditCardService = Mockito.mock(GenericCreditCardService.class);
 		Purchase p = BillingCalculator.calculateTotalPurchase(customer, "EL-001,FU-002");
 		
 		//Mocking external service behavior
