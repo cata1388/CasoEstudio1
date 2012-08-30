@@ -1,6 +1,6 @@
 package co.edu.eafit.carritocompras.service;
 
-import co.edu.eafit.carritocompras.data.Customer;
+import co.edu.eafit.carritocompras.data.Customer; 
 import co.edu.eafit.carritocompras.data.Purchase;
 import co.edu.eafit.carritocompras.data.Product;
 import static org.junit.Assert.*;
@@ -13,17 +13,19 @@ import org.mockito.Mockito;
 //import org.junit.Before;
 import static org.mockito.Mockito.when;
 
+@SuppressWarnings("unused")
 public class BillingCalculatorTest {
-    
+	
     private Customer customer;
-   // private BillingCalculator billingCalculator;
+    private BillingCalculator billingCalculator;
     
     
     @Before
     public void before(){
         customer = new Customer("a11","b");
-      //  billingCalculator = new BillingCalculator();
+        billingCalculator = new BillingCalculator();
     }
+        
     /**
      * Test of calculateTotalPurchase method, of class BillingCalculator.
      */
@@ -53,14 +55,17 @@ public class BillingCalculatorTest {
         assertEquals(result.getTotalPrice().add(discounts),price);  
     }
     
+    /** 
+     * test of iva method of class CalculateIva
+     */
     @Test
     public void testCalculateIva()
     {
-    	String productsFlatFile = "EL-002,FU-007,FU-008";
-    	for (String code : productsFlatFile.split(","))
-    	{
-    		 CalculateIva calculateIva = Mockito.mock(CalculateIva.class);
-    		 when(calculateIva.iva(code)).thenReturn(new BigDecimal(Math.random()*0.05));
-    	}
-    }
+    	CalculateIva calculateIva = Mockito.mock(CalculateIva.class);
+    	Purchase p = BillingCalculator.calculateTotalPurchase(customer, "EL-003,FU-001");
+    	
+    	when(CalculateIva.iva(p.getCode())).thenReturn(new BigDecimal(Math.random()*0.05));
+    	
+    } 
+
 }
