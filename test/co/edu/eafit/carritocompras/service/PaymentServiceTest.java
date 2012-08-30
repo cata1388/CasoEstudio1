@@ -26,6 +26,7 @@ public class PaymentServiceTest {
 		Purchase p = BillingCalculator.calculateTotalPurchase(customer, "EL-001,FU-002");
 		
 		//Mocking external service behavior
+//		when(creditCardService.pay("xxxx111xxxx", p.getTotalPrice())).thenReturn(true);
 		when(creditCardService.pay("xxxx111xxxx", p.getTotalPrice())).thenReturn(true);
 		
 		paymentService.pay(customer, p, "xxxx111xxxx", creditCardService);

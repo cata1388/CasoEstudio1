@@ -8,9 +8,10 @@ import java.math.BigDecimal;
 import org.junit.*;
 import org.mockito.Mockito;
 
-import static org.mockito.*;
+//import static org.mockito.*;
 //import org.junit.Test;
 //import org.junit.Before;
+import static org.mockito.Mockito.when;
 
 public class BillingCalculatorTest {
     
@@ -55,10 +56,11 @@ public class BillingCalculatorTest {
     @Test
     public void testCalculateIva()
     {
-    	CalculateIva calculateIva = Mockito.mock(CalculateIva.class);
-    	
-    	when(calculateIva.iva(code) )
-    	
+    	String productsFlatFile = "EL-002,FU-007,FU-008";
+    	for (String code : productsFlatFile.split(","))
+    	{
+    		 CalculateIva calculateIva = Mockito.mock(CalculateIva.class);
+    		 when(calculateIva.iva(code)).thenReturn(new BigDecimal(Math.random()*0.05));
+    	}
     }
-
 }
