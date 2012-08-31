@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import org.junit.*;
 import org.mockito.Mockito;
+import org.mockito.stubbing.Answer;
 
 //import static org.mockito.*;
 //import org.junit.Test;
@@ -67,5 +68,37 @@ public class BillingCalculatorTest {
     	when(CalculateIva.iva(p.getCode())).thenReturn(new BigDecimal(Math.random()*0.05));
     	
     } 
+    
+    /**
+     * test for all methods of customer points system of class Customer
+     */
+    @Test
+    public void addPoints()
+    {
+    	int points;
+    	String productsFlatFile = "EL-002,FU-007,FU-008";
+        Purchase result = null;
+        result = BillingCalculator.calculateTotalPurchase(customer, productsFlatFile);
+        Customer client = Mockito.mock(Customer.class);
+        when(client.calculatePoints()).thenReturn(points= (result.getTotalPrice().divide(new BigDecimal(1000))).intValue());
+        when(client.addPoints()).thenReturn(customer.getPoints().add(new BigDecimal(points)));
+        customer.calculatePoints();
+        customer.addPoints();
+    }
 
+    @Test
+    public void calculateDiscountPoints()
+    {
+    	String productsFlatFile = "EL-002,FU-007,FU-008";
+        Purchase result = null;
+        result = BillingCalculator.calculateTotalPurchase(customer, productsFlatFile);
+        Customer client = Mockito.mock(Customer.class);
+        client = result.getCustomer();
+        when(client.calculateDiscountPoints()).thenReturn(result.getTotalPrice().multiply(new BigDecimal(Math.random()*0.02)));
+        when(client.discountPoints()).thenReturn(true);
+        if ((client.getPoints().intValue()) > 1000)
+        {
+        	client.discountPoints();
+        }
+    }
 }

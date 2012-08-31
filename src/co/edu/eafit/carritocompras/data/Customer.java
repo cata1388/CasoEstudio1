@@ -1,6 +1,9 @@
 package co.edu.eafit.carritocompras.data;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import org.mockito.stubbing.OngoingStubbing;
 
 public class Customer {
 
@@ -37,5 +40,32 @@ public class Customer {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public Object calculatePoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object addPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BigDecimal getPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean discountPoints() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public Object calculateDiscountPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

@@ -90,4 +90,9 @@ public class Purchase {
 		this.code = code;
 	}
 
+	public int getPoints() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
