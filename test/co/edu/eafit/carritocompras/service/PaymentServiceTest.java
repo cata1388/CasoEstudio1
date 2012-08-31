@@ -24,6 +24,7 @@ public class PaymentServiceTest {
 	public void testPay() {
 		GenericCreditCardService creditCardService = Mockito.mock(GenericCreditCardService.class);
 		Purchase p = BillingCalculator.calculateTotalPurchase(customer, "EL-001,FU-002");
+
 		
 		//Mocking external service behavior
 //		when(creditCardService.pay("xxxx111xxxx", p.getTotalPrice())).thenReturn(true);
