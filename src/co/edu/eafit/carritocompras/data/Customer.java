@@ -3,8 +3,6 @@ package co.edu.eafit.carritocompras.data;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.mockito.stubbing.OngoingStubbing;
-
 public class Customer {
 
 	private String code;
@@ -41,7 +39,7 @@ public class Customer {
 		this.name = name;
 	}
 
-	public Object calculatePoints() {
+	public Object calculatePoints(Purchase result) {
 		// TODO Auto-generated method stub
 		return null;
 	}
