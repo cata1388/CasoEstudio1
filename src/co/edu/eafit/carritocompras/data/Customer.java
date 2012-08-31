@@ -54,9 +54,9 @@ public class Customer {
 		return null;
 	}
 
-	public BigDecimal getPoints() {
+	public int getPoints() {
 		// TODO Auto-generated method stub
-		return null;
+		return points;
 	}
 
 	public boolean discountPoints() {

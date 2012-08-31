@@ -81,7 +81,7 @@ public class BillingCalculatorTest {
         result = BillingCalculator.calculateTotalPurchase(customer, productsFlatFile);
         Customer client = Mockito.mock(Customer.class);
         when(client.calculatePoints(result)).thenReturn(points= (result.getTotalPrice().divide(new BigDecimal(1000))).intValue());
-        when(client.addPoints(points,result)).thenReturn(customer.getPoints().add(new BigDecimal(points)));
+        when(client.addPoints(points,result)).thenReturn(customer.getPoints()+(new BigDecimal(points)).intValue());
         customer.calculatePoints(result);
         customer.addPoints(points,result);
     }
@@ -96,7 +96,7 @@ public class BillingCalculatorTest {
         client = result.getCustomer();
         when(client.calculateDiscountPoints()).thenReturn(result.getTotalPrice().multiply(new BigDecimal(Math.random()*0.02)));
         when(client.discountPoints()).thenReturn(true);
-        if ((client.getPoints().intValue()) > 1000)
+        if ((client.getPoints()) > 1000)
         {
         	client.discountPoints();
         }
