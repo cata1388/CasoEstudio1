@@ -39,9 +39,11 @@ public class Customer {
 		this.name = name;
 	}
 
-	public Object calculatePoints(Purchase result) {
+	public Object calculatePoints(Purchase result) 
+	{
 		// TODO Auto-generated method stub
-		return null;
+		int points = (result.getTotalPrice().intValue())/1000;
+		return points;
 	}
 
 	public Object addPoints() {
