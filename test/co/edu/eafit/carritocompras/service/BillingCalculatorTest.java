@@ -17,42 +17,47 @@ import static org.mockito.Mockito.when;
 @SuppressWarnings("unused")
 public class BillingCalculatorTest {
 	
-    private Customer customer;
-    private BillingCalculator billingCalculator;
-    
+    private static Customer customer;
+    private static BillingCalculator billingCalculator;
+    private static Purchase result;
     
     @Before
     public void before(){
         customer = new Customer("a11","b");
-        billingCalculator = new BillingCalculator();
+        result = new Purchase(customer);
+        
+
+        //billingCalculator = new BillingCalculator();
     }
         
     /**
      * Test of calculateTotalPurchase method, of class BillingCalculator.
      */
     @Test
-    public void testCalculateTotalPurchase() {
+    public static void testCalculateTotalPurchase() {
         String productsFlatFile = "EL-002,FU-007,FU-008";
-        Purchase result = null;
         BigDecimal discounts = BigDecimal.ZERO;
         BigDecimal price = BigDecimal.ZERO;
         result = BillingCalculator.calculateTotalPurchase(customer, productsFlatFile);
-        for (String code : productsFlatFile.split(","))
-        {
-            Product p = Product.buildProduct(code);
-            if (code.startsWith("EL"))
+        if (result != null){
+            for (String code : productsFlatFile.split(","))
             {
-                //true values
-                price = price.add(p.getPrice());
-                // just discounts
-                discounts = discounts.add(p.getPrice().multiply(new BigDecimal(0.05)));
-            }
-            else if (code.startsWith("FU"))
-            {
-                price = price.add(p.getPrice());
-                discounts = discounts.add(p.getPrice().multiply(new BigDecimal (0.1)));
+                Product p = Product.buildProduct(code);
+                if (code.startsWith("EL"))
+                {
+                    //true values
+                    price = price.add(p.getPrice());
+                    // just discounts
+                    discounts = discounts.add(p.getPrice().multiply(new BigDecimal(0.05)));
+                }
+                else if (code.startsWith("FU"))
+                {
+                    price = price.add(p.getPrice());
+                    discounts = discounts.add(p.getPrice().multiply(new BigDecimal (0.1)));
+                }
             }
         }
+
         assertEquals(result.getTotalPrice().add(discounts),price);  
     }
     
@@ -73,24 +78,24 @@ public class BillingCalculatorTest {
      * test for all methods of customer points system of class Customer
      */
     @Test
-    public void addPoints()
+    public void tesAddPoints()
     {
     	int points;
     	String productsFlatFile = "EL-002,FU-007,FU-008";
-        Purchase result = null;
+        Purchase result = new Purchase(customer);
         result = BillingCalculator.calculateTotalPurchase(customer, productsFlatFile);
         Customer client = Mockito.mock(Customer.class);
-        when(client.calculatePoints(result)).thenReturn(points= (result.getTotalPrice().divide(new BigDecimal(1000))).intValue());
-        when(client.addPoints(points,result)).thenReturn(customer.getPoints()+(new BigDecimal(points)).intValue());
-        customer.calculatePoints(result);
-        customer.addPoints(points,result);
+        when(Customer.calculatePoints(result)).thenReturn(points= (result.getTotalPrice().divide(new BigDecimal(1000))).intValue());
+        when(Customer.addPoints(points,result)).thenReturn(customer.getPoints()+(new BigDecimal(points)).intValue());
+        Customer.calculatePoints(result);
+        Customer.addPoints(points,result);
     }
 
     @Test
-    public void calculateDiscountPoints()
+    public void testCalculateDiscountPoints()
     {
     	String productsFlatFile = "EL-002,FU-007,FU-008";
-        Purchase result = null;
+        Purchase result;
         result = BillingCalculator.calculateTotalPurchase(customer, productsFlatFile);
         Customer client = Mockito.mock(Customer.class);
         client = result.getCustomer();
