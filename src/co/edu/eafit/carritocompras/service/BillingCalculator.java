@@ -1,6 +1,6 @@
 package co.edu.eafit.carritocompras.service;
 
-import java.math.BigDecimal;
+import java.math.BigDecimal; 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +31,13 @@ public class BillingCalculator {
 			total = total.subtract(p.calculateDiscount());
 			products.add(p);
 		}
-		
+		int point = Customer.calculatePoints(purchase);
+		Customer.addPoints(point, purchase);
+		int pointDiscount = purchase.getCustomer().getPoints();
+		if (pointDiscount > 1000)
+		{
+			total = total.subtract(total.multiply(new BigDecimal(0.02)));
+		}
 		purchase.setProducts(products);
 		purchase.setTotalPrice(total);
 		try {

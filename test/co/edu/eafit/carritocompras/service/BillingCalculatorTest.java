@@ -1,6 +1,6 @@
 package co.edu.eafit.carritocompras.service;
 
-import co.edu.eafit.carritocompras.data.Customer; 
+import co.edu.eafit.carritocompras.data.Customer;  
 import co.edu.eafit.carritocompras.data.Purchase;
 import co.edu.eafit.carritocompras.data.Product;
 import static org.junit.Assert.*;
@@ -94,11 +94,7 @@ public class BillingCalculatorTest {
         result = BillingCalculator.calculateTotalPurchase(customer, productsFlatFile);
         Customer client = Mockito.mock(Customer.class);
         client = result.getCustomer();
-        when(client.calculateDiscountPoints()).thenReturn(result.getTotalPrice().multiply(new BigDecimal(Math.random()*0.02)));
-        when(client.discountPoints()).thenReturn(true);
-        if ((client.getPoints()) > 1000)
-        {
-        	client.discountPoints();
-        }
+        when(client.calculateDiscountPoints(result)).thenReturn(result.getTotalPrice().multiply(new BigDecimal(Math.random()*0.02)));
+
     }
 }

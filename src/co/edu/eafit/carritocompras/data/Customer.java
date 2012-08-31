@@ -9,7 +9,8 @@ public class Customer {
 	private String name;
 	private List<Purchase> purchases;
 	public int points;
-	public int pointsPurchase;
+	public static int pointsPurchase;
+	public BigDecimal discountPoints;
 
 	public Customer(String code, String name) {
 		super();
@@ -41,14 +42,14 @@ public class Customer {
 		this.name = name;
 	}
 
-	public Object calculatePoints(Purchase result) 
+	public static int calculatePoints(Purchase result) 
 	{
 		// TODO Auto-generated method stub
 		pointsPurchase = (result.getTotalPrice().intValue())/1000;
-		return null;
+		return pointsPurchase;
 	}
 
-	public Object addPoints(int points, Purchase result) {
+	public static Object addPoints(int points, Purchase result) {
 		// TODO Auto-generated method stub
 		points = points + pointsPurchase;
 		return null;
@@ -59,16 +60,10 @@ public class Customer {
 		return points;
 	}
 
-	public boolean discountPoints() {
+	public BigDecimal calculateDiscountPoints(Purchase result) {
 		// TODO Auto-generated method stub
-		return true;
+		discountPoints = result.getTotalPrice().multiply(new BigDecimal(0.02));
+		return discountPoints;
 	}
-
-	public Object calculateDiscountPoints() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 }
