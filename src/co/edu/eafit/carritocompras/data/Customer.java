@@ -8,6 +8,8 @@ public class Customer {
 	private String code;
 	private String name;
 	private List<Purchase> purchases;
+	public int points;
+	public int pointsPurchase;
 
 	public Customer(String code, String name) {
 		super();
@@ -42,12 +44,13 @@ public class Customer {
 	public Object calculatePoints(Purchase result) 
 	{
 		// TODO Auto-generated method stub
-		int points = (result.getTotalPrice().intValue())/1000;
-		return points;
+		pointsPurchase = (result.getTotalPrice().intValue())/1000;
+		return null;
 	}
 
-	public Object addPoints() {
+	public Object addPoints(int points, Purchase result) {
 		// TODO Auto-generated method stub
+		points = points + pointsPurchase;
 		return null;
 	}
 
